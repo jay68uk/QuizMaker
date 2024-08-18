@@ -1,6 +1,14 @@
-namespace QuizMaker.Application.Features.GetQuizById;
+using QuizBuilder.Domain.Quiz;
 
-public sealed class QuizResponse
-{
-  public Guid Id { get; init; }
-}
+namespace QuizBuilder.Application.Features.GetQuizById;
+
+public sealed record QuizResponse(
+  Guid Id,
+  IEnumerable<QuestionResponse> Questions,
+  string Name,
+  string AccessCode,
+  string QrCode,
+  DateTimeOffset CreatedDate,
+  DateTimeOffset? RanDate,
+  Guid CreatedBy,
+  QuizStatus Status);

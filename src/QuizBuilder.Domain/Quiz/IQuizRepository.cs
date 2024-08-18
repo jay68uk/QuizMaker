@@ -1,4 +1,4 @@
-﻿namespace QuizMaker.Domain.Quiz;
+﻿namespace QuizBuilder.Domain.Quiz;
 
 public interface IQuizRepository
 {

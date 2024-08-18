@@ -1,8 +1,8 @@
 ﻿using Ardalis.Result;
 using FluentAssertions;
-using QuizMaker.Domain.Quiz;
+using QuizBuilder.Domain.Quiz;
 
-namespace QuizBuilder.UnitTests.Domain;
+namespace QuizBuilder.Domian.UnitTests;
 
 public class QuizTests
 {
@@ -109,7 +109,6 @@ public class QuizTests
     sut.Status.Should().Be(QuizStatus.Ready);
     sut.AccessCode.AccessCode.Should().NotBeNullOrWhiteSpace();
     sut.AccessCode.QrCode.Should().NotBeNullOrWhiteSpace();
-    sut.AccessCode.QuizLink.Should().NotBeNullOrWhiteSpace();
   }
   
   [Theory]

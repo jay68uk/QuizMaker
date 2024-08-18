@@ -1,8 +1,7 @@
-﻿using System.Runtime.InteropServices.JavaScript;
-using FluentAssertions;
-using QuizMaker.Domain.Question;
+﻿using FluentAssertions;
+using QuizBuilder.Domain.Question;
 
-namespace QuizBuilder.UnitTests.Domain;
+namespace QuizBuilder.Domian.UnitTests;
 
 public class QuestionTests
 {

@@ -1,6 +1,6 @@
 ﻿using QuizMaker.SharedKernel;
 
-namespace QuizMaker.Domain.Question;
+namespace QuizBuilder.Domain.Question;
 
 public sealed class Question : Entity
 {

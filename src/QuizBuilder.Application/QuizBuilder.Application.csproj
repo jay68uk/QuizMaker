@@ -4,7 +4,7 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <RootNamespace>QuizMaker.Application</RootNamespace>
+        <RootNamespace>QuizBuilder.Application</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -15,9 +15,8 @@
       <ProjectReference Include="..\QuizBuilder.Domain\QuizBuilder.Domain.csproj" />
       <ProjectReference Include="..\QuizMaker.SharedKernel\QuizMaker.SharedKernel.csproj" />
     </ItemGroup>
-    
+
     <ItemGroup>
         <InternalsVisibleTo Include="$(AssemblyName).UnitTests" />
     </ItemGroup>
-
 </Project>

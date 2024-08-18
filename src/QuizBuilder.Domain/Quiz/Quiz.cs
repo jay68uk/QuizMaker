@@ -1,18 +1,17 @@
 ﻿using Ardalis.Result;
-using QuizMaker.Domain.Question;
-using QuizMaker.Domain.QuizAccessCode;
+using QuizBuilder.Domain.Question;
 using QuizMaker.SharedKernel;
 
-namespace QuizMaker.Domain.Quiz;
+namespace QuizBuilder.Domain.Quiz;
 
 public sealed class Quiz : Entity
 {
+   private List<Question.Question> _questions;
    public QuizName Name { get; private set; }
    public QuizAccessCode.QuizAccessCode AccessCode { get; private set;}
    public DateTimeOffset CreatedDate { get; private set; }
    public DateTimeOffset? RanDate { get; private set; }
    public Guid CreatedBy { get; private set; }
-   public Questions Questions { get; private set; }
    public QuizStatus Status { get; private set; } 
 
    private Quiz(Guid id, QuizName name, DateTimeOffset createdDate, Guid createdBy) : base(id)
@@ -21,7 +20,7 @@ public sealed class Quiz : Entity
       CreatedDate = createdDate;
       CreatedBy = createdBy;
       Status = QuizStatus.Draft;
-      Questions = Questions.Initialise();
+      _questions = [];
    }
 
    public static Quiz Create(string? quizName, DateTimeOffset created, Guid createdBy)
@@ -30,7 +29,7 @@ public sealed class Quiz : Entity
       return quiz;
    }
    
-   public int NumberOfQuestions => Questions.Count();
+   public int NumberOfQuestions => _questions.Count();
 
    public void ChangeStatus(QuizStatus status)
    {
@@ -76,5 +75,26 @@ public sealed class Quiz : Entity
          default:
             return Result.Error(QuizErrors.PrepareError);
       }
+   }
+   
+   public IEnumerable<Question.Question> GetQuestions() => _questions.AsReadOnly();
+   
+   public void Add(Question.Question question)
+   {
+      _questions.Add(question);
+   }
+
+   public void Delete(Question.Question question)
+   {
+      _questions.Remove(question);
+   }
+
+   public void RenumberQuestions()
+   {
+      _questions = _questions.Select((q, index) =>
+      {
+         q.UpdateNumbering(new QuestionNumber(index + 1));
+         return q;
+      }).ToList();
    }
 }

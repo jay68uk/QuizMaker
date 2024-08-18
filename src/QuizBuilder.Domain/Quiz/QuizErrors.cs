@@ -1,6 +1,4 @@
-﻿using Ardalis.Result;
-
-namespace QuizMaker.Domain.Quiz;
+﻿namespace QuizBuilder.Domain.Quiz;
 
 public static class QuizErrors
 {

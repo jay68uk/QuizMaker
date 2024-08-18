@@ -1,8 +1,8 @@
 ﻿using Ardalis.Result;
-using QuizMaker.Domain.Quiz;
+using QuizBuilder.Domain.Quiz;
 using QuizMaker.SharedKernel.Messaging;
 
-namespace QuizMaker.Application.Features.GetQuizById;
+namespace QuizBuilder.Application.Features.GetQuizById;
 
 internal sealed class GetQuizByIdQueryHandler : IQueryHandler<RequestQuizByIdQuery, QuizResponse>
 {

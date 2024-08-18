@@ -1,6 +1,6 @@
 using Ardalis.GuardClauses;
 
-namespace QuizMaker.Domain.Question;
+namespace QuizBuilder.Domain.Question;
 
 public record QuestionNumber
 {

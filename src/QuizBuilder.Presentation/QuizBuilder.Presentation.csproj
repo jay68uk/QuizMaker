@@ -5,6 +5,7 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <RootNamespace>QuizBuilder.Presentation</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -17,6 +18,11 @@
       <Content Include="..\..\.dockerignore">
         <Link>.dockerignore</Link>
       </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\QuizBuilder.Application\QuizBuilder.Application.csproj" />
+      <ProjectReference Include="..\QuizBuilder.Domain\QuizBuilder.Domain.csproj" />
     </ItemGroup>
 
 </Project>

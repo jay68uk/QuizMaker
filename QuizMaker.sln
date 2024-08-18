@@ -36,6 +36,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{426313
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizBuilder.Domian.UnitTests", "tests\QuizBuilder\Domain\QuizBuilder.Domian.UnitTests\QuizBuilder.Domian.UnitTests.csproj", "{A7806998-7D2F-4C92-9B24-CC17E861AD5D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{141DD967-E2D7-4FE9-95B9-6169B2D7BEF7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizBuilder.Presentation.UnitTests", "tests\QuizBuilder\Presentation\QuizBuilder.Presentation.UnitTests\QuizBuilder.Presentation.UnitTests.csproj", "{3B8F7121-2829-4D78-83F0-B374FE2C9EC4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -78,6 +82,10 @@ Global
 		{A7806998-7D2F-4C92-9B24-CC17E861AD5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A7806998-7D2F-4C92-9B24-CC17E861AD5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A7806998-7D2F-4C92-9B24-CC17E861AD5D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B8F7121-2829-4D78-83F0-B374FE2C9EC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B8F7121-2829-4D78-83F0-B374FE2C9EC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B8F7121-2829-4D78-83F0-B374FE2C9EC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B8F7121-2829-4D78-83F0-B374FE2C9EC4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{9CAAD0A7-AAA5-4A88-8FCC-09170D491C1E} = {33926EF5-4B70-40B4-9CB9-14A806DE78FE}
@@ -96,5 +104,7 @@ Global
 		{426313DE-F97D-4EAE-A8DA-B7FE6A231010} = {4D9ECC37-5E8E-4F98-92CD-C37877A45089}
 		{A7806998-7D2F-4C92-9B24-CC17E861AD5D} = {426313DE-F97D-4EAE-A8DA-B7FE6A231010}
 		{5FE41097-053E-4591-9C97-89B73E05B6D6} = {7E845201-8BC6-474E-BC4B-119E846EE003}
+		{141DD967-E2D7-4FE9-95B9-6169B2D7BEF7} = {4D9ECC37-5E8E-4F98-92CD-C37877A45089}
+		{3B8F7121-2829-4D78-83F0-B374FE2C9EC4} = {141DD967-E2D7-4FE9-95B9-6169B2D7BEF7}
 	EndGlobalSection
 EndGlobal
