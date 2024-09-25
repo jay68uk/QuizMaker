@@ -2,7 +2,7 @@
 
 namespace QuizBuilder.Domain.Question;
 
-public sealed class Question : Entity
+public sealed class Question : Entity, IEquatable<Question>
 {
   public Description Description { get; private set; }
   public QuestionNumber Number { get; private set; }
@@ -23,5 +23,10 @@ public sealed class Question : Entity
   public void UpdateNumbering(QuestionNumber newNumber)
   {
     Number = newNumber;
+  }
+
+  public bool Equals(Question? other)
+  {
+    return Description.Value == other?.Description.Value && Number.Value == other?.Number.Value;
   }
 }

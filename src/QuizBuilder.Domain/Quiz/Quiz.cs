@@ -12,8 +12,12 @@ public sealed class Quiz : Entity
    public DateTimeOffset CreatedDate { get; private set; }
    public DateTimeOffset? RanDate { get; private set; }
    public Guid CreatedBy { get; private set; }
-   public QuizStatus Status { get; private set; } 
+   public QuizStatus Status { get; private set; }
 
+   internal Quiz()
+   {
+      Id = Guid.Empty;
+   }
    private Quiz(Guid id, QuizName name, DateTimeOffset createdDate, Guid createdBy) : base(id)
    {
       Name = name;
@@ -29,7 +33,7 @@ public sealed class Quiz : Entity
       return quiz;
    }
    
-   public int NumberOfQuestions => _questions.Count();
+   public int NumberOfQuestions => _questions.Count;
 
    public void ChangeStatus(QuizStatus status)
    {

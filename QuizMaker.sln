@@ -34,7 +34,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{426313DE-F97D-4EAE-A8DA-B7FE6A231010}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizBuilder.Domian.UnitTests", "tests\QuizBuilder\Domain\QuizBuilder.Domian.UnitTests\QuizBuilder.Domian.UnitTests.csproj", "{A7806998-7D2F-4C92-9B24-CC17E861AD5D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizBuilder.Domain.UnitTests", "tests\QuizBuilder\Domain\QuizBuilder.Domain.UnitTests\QuizBuilder.Domain.UnitTests.csproj", "{A7806998-7D2F-4C92-9B24-CC17E861AD5D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{141DD967-E2D7-4FE9-95B9-6169B2D7BEF7}"
 EndProject

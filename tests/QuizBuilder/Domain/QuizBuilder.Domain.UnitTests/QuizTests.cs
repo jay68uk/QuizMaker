@@ -2,7 +2,7 @@
 using FluentAssertions;
 using QuizBuilder.Domain.Quiz;
 
-namespace QuizBuilder.Domian.UnitTests;
+namespace QuizBuilder.Domain.UnitTests;
 
 public class QuizTests
 {
@@ -14,13 +14,13 @@ public class QuizTests
   [Fact]
   public void Should_CreateQuiz_WhenInputValid()
   {
-    var sut = Quiz.Create(QuizName, Created, UserId);
+    var quiz = Quiz.Quiz.Create(QuizName, Created, UserId);
 
-    sut.NumberOfQuestions.Should().Be(0);
-    sut.Status.Should().Be(QuizStatus.Draft);
-    sut.CreatedBy.Should().Be(UserId);
-    sut.CreatedDate.Should().Be(Created);
-    sut.Name.Value.Should().Be(QuizName);
+    quiz.NumberOfQuestions.Should().Be(0);
+    quiz.Status.Should().Be(QuizStatus.Draft);
+    quiz.CreatedBy.Should().Be(UserId);
+    quiz.CreatedDate.Should().Be(Created);
+    quiz.Name.Value.Should().Be(QuizName);
   }
   
   [Theory]
@@ -30,69 +30,69 @@ public class QuizTests
   {
     var user = Guid.NewGuid();
     var created = DateTimeOffset.Now;
-    var sut = () => Quiz.Create(name, created, user);
+    var quizFunc = () => Quiz.Quiz.Create(name, created, user);
 
-    sut.Should().Throw<ArgumentException>();
+    quizFunc.Should().Throw<ArgumentException>();
   }
 
   [Fact]
   public void ChangeStatus_Should_ChangeStatus_WhenInvoked()
   {
-    var sut = Quiz.Create(QuizName, Created, UserId);
+    var quiz = Quiz.Quiz.Create(QuizName, Created, UserId);
     
-    sut.ChangeStatus(QuizStatus.Ready);
+    quiz.ChangeStatus(QuizStatus.Ready);
 
-    sut.Status.Should().Be(QuizStatus.Ready);
+    quiz.Status.Should().Be(QuizStatus.Ready);
   }
 
   [Fact]
   public void Finish_Should_SetCorrectStatus_WhenInvoked()
   {
-    var sut = Quiz.Create(QuizName, Created, UserId);
-    sut.ChangeStatus(QuizStatus.Running);
+    var quiz = Quiz.Quiz.Create(QuizName, Created, UserId);
+    quiz.ChangeStatus(QuizStatus.Running);
     
-    var result = sut.FinishQuiz();
+    var result = quiz.FinishQuiz();
 
     result.IsSuccess.Should().BeTrue();
-    sut.Status.Should().Be(QuizStatus.Completed);
+    quiz.Status.Should().Be(QuizStatus.Completed);
   }
   
   [Fact]
   public void Finish_Should_ReturnResultError_WhenStatusIsNot_Running()
   {
-    var sut = Quiz.Create(QuizName, Created, UserId);
+    var quiz = Quiz.Quiz.Create(QuizName, Created, UserId);
     
-    var result = sut.FinishQuiz();
+    var result = quiz.FinishQuiz();
 
     result.IsError().Should().BeTrue();
     result.Errors.Should().Contain(QuizErrors.CompletedError);
-    sut.Status.Should().Be(QuizStatus.Draft);
+    quiz.Status.Should().Be(QuizStatus.Draft);
   }
   
   [Fact]
   public void Start_Should_SetCorrectStatusAndDate_WhenInvoked()
   {
-    var sut = Quiz.Create(QuizName, Created, UserId);
-    sut.ChangeStatus(QuizStatus.Ready);
+    var quiz = Quiz.Quiz.Create(QuizName, Created, UserId);
+    quiz.ChangeStatus(QuizStatus.Ready);
     
-    var result = sut.StartQuiz(RanDate);
+    var result = quiz.StartQuiz(RanDate);
 
     result.IsSuccess.Should().BeTrue();
-    sut.Status.Should().Be(QuizStatus.Running);
-    sut.RanDate.Should().Be(RanDate);
+    quiz.Status.Should().Be(QuizStatus.Running);
+    quiz.RanDate.Should().Be(RanDate);
   }
   
   [Fact]
   public void Start_Should_ReturnResultError_WhenStatusIsNot_Ready()
   {
-    var sut = Quiz.Create(QuizName, Created, UserId);
+    var quiz = Quiz.Quiz.Create(QuizName, Created, UserId);
     
-    var result = sut.StartQuiz(RanDate);
+    var result = quiz.StartQuiz(RanDate);
 
     result.IsError().Should().BeTrue();
     result.Errors.Should().Contain(QuizErrors.StartError);
-    sut.Status.Should().Be(QuizStatus.Draft);
-    sut.RanDate.Should().BeNull();
+    quiz.Status.Should().Be(QuizStatus.Draft);
+    quiz.RanDate.Should().BeNull();
   }
   
   [Theory]
@@ -100,15 +100,15 @@ public class QuizTests
   [InlineData(QuizStatus.Completed)]
   public async Task Prepare_Should_SetAccessCode_WhenInvoked(QuizStatus status)
   {
-    var sut = Quiz.Create(QuizName, Created, UserId);
-    sut.ChangeStatus(status);
+    var quiz = Quiz.Quiz.Create(QuizName, Created, UserId);
+    quiz.ChangeStatus(status);
     
-    var result = await sut.PrepareQuizAsync();
+    var result = await quiz.PrepareQuizAsync();
 
     result.IsSuccess.Should().BeTrue();
-    sut.Status.Should().Be(QuizStatus.Ready);
-    sut.AccessCode.AccessCode.Should().NotBeNullOrWhiteSpace();
-    sut.AccessCode.QrCode.Should().NotBeNullOrWhiteSpace();
+    quiz.Status.Should().Be(QuizStatus.Ready);
+    quiz.AccessCode.AccessCode.Should().NotBeNullOrWhiteSpace();
+    quiz.AccessCode.QrCode.Should().NotBeNullOrWhiteSpace();
   }
   
   [Theory]
@@ -117,14 +117,14 @@ public class QuizTests
   [InlineData(QuizStatus.Deleted, QuizErrors.PrepareError)]
   public async Task Prepare_Should_ReturnResultError_WhenCurrentStatusIsIncorrect(QuizStatus status, string expectedError)
   {
-    var sut = Quiz.Create(QuizName, Created, UserId);
-    sut.ChangeStatus(status);
+    var quiz = Quiz.Quiz.Create(QuizName, Created, UserId);
+    quiz.ChangeStatus(status);
     
-    var result = await sut.PrepareQuizAsync();
+    var result = await quiz.PrepareQuizAsync();
 
     result.IsError().Should().BeTrue();
     result.Errors.Should().Contain(expectedError);
-    sut.Status.Should().Be(status);
+    quiz.Status.Should().Be(status);
   }
 }
 
