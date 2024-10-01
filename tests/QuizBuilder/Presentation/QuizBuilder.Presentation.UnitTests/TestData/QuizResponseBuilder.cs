@@ -1,10 +1,7 @@
-﻿using System.Security.Cryptography.X509Certificates;
-using QuizBuilder.Application.Features.GetQuizById;
-using QuizBuilder.Domain.Question;
+﻿using QuizBuilder.Application.Features.GetQuizById;
 using QuizBuilder.Domain.Quiz;
-using QuizBuilder.Domain.QuizAccessCode;
 
-namespace QuizBuilder.Application.UnitTests.TestData;
+namespace QuizBuilder.Presentation.UnitTests.TestData;
 
 public class QuizResponseBuilder
 {

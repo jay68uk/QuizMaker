@@ -1,7 +1,7 @@
 ﻿using QuizBuilder.Domain.Question;
 using QuizBuilder.Domain.Quiz;
 using QuizBuilder.Domain.QuizAccessCode;
-using QuizMaker.SharedKernel;
+using QuizMaker.Common.Domain;
 
 namespace QuizBuilder.Application.UnitTests.TestData;
 

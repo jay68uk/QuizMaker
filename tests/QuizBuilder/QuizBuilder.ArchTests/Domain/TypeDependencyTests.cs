@@ -10,7 +10,9 @@ public class TypeDependencyTests : BaseTest
   {
     var domainTypes = Types.InAssembly(DomainAssembly)
       .Should()
-      .NotHaveDependencyOnAny(["QuizBuilder.Infrastructure.*", "QuizBuilder.Features", "QuizBuilder.Presentation.*"])
+      .NotHaveDependencyOnAny(["QuizBuilder.Infrastructure.*",
+        "QuizBuilder.Features",
+        "QuizBuilder.Presentation.*"])
       .GetResult();
 
     domainTypes.IsSuccessful.Should().BeTrue();

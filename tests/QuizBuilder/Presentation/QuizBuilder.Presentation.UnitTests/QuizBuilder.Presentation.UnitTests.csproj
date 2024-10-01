@@ -25,6 +25,10 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\..\..\src\Common\QuizMaker.Common.Application\QuizMaker.Common.Application.csproj" />
+      <ProjectReference Include="..\..\..\..\src\Modules\QuizBuilder\QuizBuilder.Application\QuizBuilder.Application.csproj" />
+      <ProjectReference Include="..\..\..\..\src\Modules\QuizBuilder\QuizBuilder.Domain\QuizBuilder.Domain.csproj" />
+      <ProjectReference Include="..\..\..\..\src\Modules\QuizBuilder\QuizBuilder.Presentation\QuizBuilder.Presentation.csproj" />
       <ProjectReference Include="..\..\..\..\src\QuizBuilder.Presentation\QuizBuilder.Presentation.csproj" />
       <ProjectReference Include="..\..\Application\QuizBuilder.Application.UnitTests\QuizBuilder.Application.UnitTests.csproj" />
     </ItemGroup>

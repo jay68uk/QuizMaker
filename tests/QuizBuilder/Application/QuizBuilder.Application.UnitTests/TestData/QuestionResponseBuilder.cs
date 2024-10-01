@@ -1,7 +1,4 @@
-﻿using QuizBuilder.Domain.Question;
-using QuizMaker.SharedKernel;
-
-namespace QuizBuilder.Application.UnitTests.TestData;
+﻿namespace QuizBuilder.Application.UnitTests.TestData;
 
 public class QuestionResponseBuilder
 {

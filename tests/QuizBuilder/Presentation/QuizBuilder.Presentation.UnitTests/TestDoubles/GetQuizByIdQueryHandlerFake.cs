@@ -1,7 +1,7 @@
 ﻿using Ardalis.Result;
 using QuizBuilder.Application.Features.GetQuizById;
 using QuizBuilder.Presentation.UnitTests.TestData;
-using QuizMaker.SharedKernel.Messaging;
+using QuizMaker.Common.Application.Messaging;
 
 namespace QuizBuilder.Presentation.UnitTests.TestDoubles;
 

@@ -23,6 +23,9 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\..\..\src\Common\QuizMaker.Common.Domain\QuizMaker.Common.Domain.csproj" />
+      <ProjectReference Include="..\..\..\..\src\Modules\QuizBuilder\QuizBuilder.Application\QuizBuilder.Application.csproj" />
+      <ProjectReference Include="..\..\..\..\src\Modules\QuizBuilder\QuizBuilder.Domain\QuizBuilder.Domain.csproj" />
       <ProjectReference Include="..\..\..\..\src\QuizBuilder.Application\QuizBuilder.Application.csproj" />
     </ItemGroup>
 

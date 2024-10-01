@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 using Microsoft.VisualStudio.TestPlatform.TestHost;
-using QuizMaker.SharedKernel;
+using QuizMaker.Common.Domain;
 
 namespace QuizBuilder.ArchTests;
 

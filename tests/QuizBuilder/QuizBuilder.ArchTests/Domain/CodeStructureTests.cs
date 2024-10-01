@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using FluentAssertions;
 using NetArchTest.Rules;
-using QuizMaker.SharedKernel;
+using QuizMaker.Common.Domain;
 
 namespace QuizBuilder.ArchTests.Domain;
 

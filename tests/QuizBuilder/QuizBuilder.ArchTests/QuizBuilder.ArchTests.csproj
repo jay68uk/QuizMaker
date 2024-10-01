@@ -23,7 +23,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\src\QuizMaker.SharedKernel\QuizMaker.SharedKernel.csproj" />
+      <ProjectReference Include="..\..\..\src\Common\QuizMaker.Common.Domain\QuizMaker.Common.Domain.csproj" />
+      <ProjectReference Include="..\..\..\src\QuizMaker.Common.Application\QuizMaker.Common.Application.csproj" />
     </ItemGroup>
 
     <ItemGroup>
