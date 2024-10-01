@@ -6,8 +6,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.Extensions.DependencyInjection;
 using QuizBuilder.Application.Features.GetQuizById;
-using QuizBuilder.Application.UnitTests.TestData;
-using QuizBuilder.Application.UnitTests.TestDoubles;
 using QuizBuilder.Presentation.Features.QuizEndpoints;
 using QuizBuilder.Presentation.UnitTests.TestData;
 using QuizBuilder.Presentation.UnitTests.TestDoubles;

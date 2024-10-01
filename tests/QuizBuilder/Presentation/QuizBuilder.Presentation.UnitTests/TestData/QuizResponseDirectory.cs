@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Time.Testing;
 using QuizBuilder.Application.Features.GetQuizById;
-using QuizBuilder.Application.UnitTests.TestData;
 
 namespace QuizBuilder.Presentation.UnitTests.TestData;
 

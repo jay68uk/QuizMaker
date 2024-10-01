@@ -9,7 +9,6 @@
 
     <ItemGroup>
       <PackageReference Include="Dapper" Version="2.1.35" />
-      <PackageReference Include="MediatR" Version="12.4.0" />
     </ItemGroup>
 
     <ItemGroup>
@@ -22,6 +21,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="Abstractions\" />
       <Folder Include="Behaviours\" />
     </ItemGroup>
 </Project>

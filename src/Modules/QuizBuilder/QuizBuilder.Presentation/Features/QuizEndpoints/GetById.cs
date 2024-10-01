@@ -6,11 +6,17 @@ using QuizBuilder.Application.Features.GetQuizById;
 
 namespace QuizBuilder.Presentation.Features.QuizEndpoints;
 
-public class GetById(ISender sender) : EndpointWithoutRequest<Results<Ok<QuizResponse>,
-  NotFound,
-  ProblemDetails>>
+public class GetById(ISender sender) : EndpointWithoutRequest
+  <Results<
+    Ok<QuizResponse>,
+    NotFound,
+    ProblemDetails>>
 {
-  public override void Configure() => Get("/quiz/{QuizId}");
+  public override void Configure()
+  {
+    Get("/quizzes/{QuizId}");
+    AllowAnonymous();
+  }
 
   public override async Task<Results<Ok<QuizResponse>, 
       NotFound, 

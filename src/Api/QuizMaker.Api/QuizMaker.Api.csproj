@@ -18,4 +18,10 @@
       </Content>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\Common\QuizMaker.Common.Infrastructure\QuizMaker.Common.Infrastructure.csproj" />
+      <ProjectReference Include="..\..\Common\QuizMaker.Common.Presentation\QuizMaker.Common.Presentation.csproj" />
+      <ProjectReference Include="..\..\Modules\QuizBuilder\QuizBuilder.Presentation\QuizBuilder.Presentation.csproj" />
+    </ItemGroup>
+
 </Project>

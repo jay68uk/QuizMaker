@@ -57,6 +57,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizMaker.Common.Presentation", "src\Common\QuizMaker.Common.Presentation\QuizMaker.Common.Presentation.csproj", "{30AD54F7-2B0F-42AE-A4A3-DA47AF2DA070}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizMaker.Common.Infrastructure", "src\Common\QuizMaker.Common.Infrastructure\QuizMaker.Common.Infrastructure.csproj", "{88DACF14-F94A-47C3-A98B-1E0F43D9EA69}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -115,6 +117,10 @@ Global
 		{30AD54F7-2B0F-42AE-A4A3-DA47AF2DA070}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30AD54F7-2B0F-42AE-A4A3-DA47AF2DA070}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{30AD54F7-2B0F-42AE-A4A3-DA47AF2DA070}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88DACF14-F94A-47C3-A98B-1E0F43D9EA69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88DACF14-F94A-47C3-A98B-1E0F43D9EA69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88DACF14-F94A-47C3-A98B-1E0F43D9EA69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88DACF14-F94A-47C3-A98B-1E0F43D9EA69}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{4D9ECC37-5E8E-4F98-92CD-C37877A45089} = {6A73433B-2B5E-41C5-953B-5F30AE8F3E17}
@@ -141,5 +147,6 @@ Global
 		{6DCFEB6F-5E8D-4B28-973E-916BF8AE7E94} = {39AAC64D-ECAF-40F5-947F-038A66770BD8}
 		{DE82B149-339C-4F7B-A2B0-FDC521B2918B} = {4AB332F8-ACA0-4F03-BFFB-9CD3A795C13E}
 		{30AD54F7-2B0F-42AE-A4A3-DA47AF2DA070} = {8E56D3D7-8115-4BF3-A7A9-4C413AD3A670}
+		{88DACF14-F94A-47C3-A98B-1E0F43D9EA69} = {8E56D3D7-8115-4BF3-A7A9-4C413AD3A670}
 	EndGlobalSection
 EndGlobal

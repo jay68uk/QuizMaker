@@ -1,16 +1,16 @@
 ﻿using Ardalis.Result;
 using Dapper;
-using QuizBuilder.Application.Abstractions;
+using QuizMaker.Common.Application.Data;
 using QuizMaker.Common.Application.Messaging;
 
 namespace QuizBuilder.Application.Features.GetQuizById;
 
-internal sealed class GetQuizByIdQueryHandler(ISqlConnectionFactory sqlConnectionFactory)
+internal sealed class GetQuizByIdQueryHandler(IDbConnectionFactory dbConnectionFactory)
   : IQueryHandler<RequestQuizByIdQuery, QuizResponse>
 {
   public async Task<Result<QuizResponse>> Handle(RequestQuizByIdQuery request, CancellationToken cancellationToken)
   {
-    using var connection = sqlConnectionFactory.CreateConnection();
+    using var connection = await dbConnectionFactory.OpenConnectionAsync();
 
     const string sql = """
                        SELECT
