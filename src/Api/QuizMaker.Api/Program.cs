@@ -8,7 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpoints(ModuleAssemblyReferences.PresentationAssemblies());
 builder.Services.AddApplication(ModuleAssemblyReferences.ApplicationAssemblies());
 
-builder.Services.AddInfrastructure();
+var databaseConnectionString = builder.Configuration.GetConnectionStringOrThrow("Database");
+builder.Services.AddInfrastructure(databaseConnectionString);
 
 var app = builder.Build();
 

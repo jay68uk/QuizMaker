@@ -19,7 +19,7 @@ public sealed class QuizAccessCode
   public static async Task<QuizAccessCode> Create()
   {
     var code = Ulid.NewUlid().ToGuid().ToString();
-    await Task.Delay(1000); //TODO Generate QR code
+    await Task.Delay(1000);
     return new QuizAccessCode(code, code);
   }
 }

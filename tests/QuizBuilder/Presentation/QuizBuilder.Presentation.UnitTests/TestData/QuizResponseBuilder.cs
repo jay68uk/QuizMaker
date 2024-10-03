@@ -1,17 +1,17 @@
-﻿using QuizBuilder.Application.Features.GetQuizById;
+﻿using System.Diagnostics.CodeAnalysis;
+using QuizBuilder.Application.Features.GetQuizById;
 using QuizBuilder.Domain.Quiz;
 
 namespace QuizBuilder.Presentation.UnitTests.TestData;
 
 public class QuizResponseBuilder
 {
-  private Guid _id;
-  private IReadOnlyList<QuestionResponse> _questions = [];
-  private string? _name = null!;
+  private readonly Guid _id;
+  private string? _name;
   private string? _accessCode;
   private string? _qrCode;
   private DateTimeOffset _createdDate;
-  private DateTimeOffset? _ranDate = null;
+  private DateTimeOffset? _ranDate;
   private Guid _createdBy;
   private QuizStatus _status = QuizStatus.Draft;
   
@@ -20,9 +20,9 @@ public class QuizResponseBuilder
     _id = id;
   }
 
-  public static QuizResponseBuilder Default() => new QuizResponseBuilder(Ulid.NewUlid().ToGuid());
+  public static QuizResponseBuilder Default() => new(Ulid.NewUlid().ToGuid());
   
-  public static QuizResponseBuilder DefaultWithId(Guid id) => new QuizResponseBuilder(id);
+  public static QuizResponseBuilder DefaultWithId(Guid id) => new(id);
   
   public QuizResponseBuilder WithName(string name)
   {
@@ -38,11 +38,11 @@ public class QuizResponseBuilder
         return this;
       case true when accessCode is null:
         _accessCode = Ulid.NewUlid().ToGuid().ToString();
-        _qrCode = string.Empty; // TODO how to generate QRCode
+        _qrCode = string.Empty;
         break;
       default:
         _accessCode = accessCode.ToString();
-        _qrCode = string.Empty; // TODO how to generate QRCode from access code
+        _qrCode = string.Empty; 
         break;
     }
 
@@ -75,6 +75,7 @@ public class QuizResponseBuilder
 
   public static implicit operator QuizResponse(QuizResponseBuilder builder) => builder.Build();
 
+  [SuppressMessage("Major Code Smell", "S3928:Parameter names used into ArgumentException constructors should match an existing one ")]
   private QuizResponse Build()
   {
     return new QuizResponse(_id,

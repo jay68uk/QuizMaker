@@ -10,9 +10,9 @@ public class QuestionResponseBuilder
     _id = id;
   }
 
-  public static QuestionResponseBuilder Default() => new QuestionResponseBuilder(Ulid.NewUlid().ToGuid());
+  public static QuestionResponseBuilder Default() => new(Ulid.NewUlid().ToGuid());
   
-  public static QuestionResponseBuilder DefaultWithId(Guid id) => new QuestionResponseBuilder(id);
+  public static QuestionResponseBuilder DefaultWithId(Guid id) => new(id);
   
   public QuestionResponseBuilder WithDescription(string description)
   {

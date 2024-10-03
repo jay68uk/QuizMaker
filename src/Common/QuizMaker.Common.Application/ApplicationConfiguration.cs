@@ -12,13 +12,7 @@ public static class ApplicationConfiguration
     services.AddMediatR(config =>
     {
       config.RegisterServicesFromAssemblies(moduleAssemblies);
-
-      // config.AddOpenBehavior(typeof(ExceptionHandlingPipelineBehavior<,>));
-      // config.AddOpenBehavior(typeof(RequestLoggingPipelineBehavior<,>));
-      // config.AddOpenBehavior(typeof(ValidationPipelineBehavior<,>));
     });
-
-    //services.AddValidatorsFromAssemblies(moduleAssemblies, includeInternalTypes: true);
 
     return services;
   }

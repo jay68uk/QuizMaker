@@ -9,7 +9,7 @@ public class QuizEntityBuilder : Entity
 {
   private List<Question> _questions = [];
   private QuizName _name = null!;
-  private QuizAccessCode? _accessCode = null;
+  private QuizAccessCode? _accessCode;
   private DateTimeOffset _createdDate;
   private DateTimeOffset? _ranDate = null;
   private Guid _createdBy;
@@ -20,9 +20,9 @@ public class QuizEntityBuilder : Entity
     
   }
 
-  public static QuizEntityBuilder Default() => new QuizEntityBuilder(Ulid.NewUlid().ToGuid());
+  public static QuizEntityBuilder Default() => new(Ulid.NewUlid().ToGuid());
   
-  public static QuizEntityBuilder DefaultWithId(Guid id) => new QuizEntityBuilder(id);
+  public static QuizEntityBuilder DefaultWithId(Guid id) => new(id);
   
   public QuizEntityBuilder WithName(string name)
   {

@@ -1,4 +1,5 @@
-﻿using Ardalis.Result;
+﻿using System.Data.Common;
+using Ardalis.Result;
 using Dapper;
 using QuizMaker.Common.Application.Data;
 using QuizMaker.Common.Application.Messaging;
@@ -10,7 +11,7 @@ internal sealed class GetQuizByIdQueryHandler(IDbConnectionFactory dbConnectionF
 {
   public async Task<Result<QuizResponse>> Handle(RequestQuizByIdQuery request, CancellationToken cancellationToken)
   {
-    using var connection = await dbConnectionFactory.OpenConnectionAsync();
+      await using var connection = await dbConnectionFactory.OpenConnectionAsync();
 
     const string sql = """
                        SELECT
@@ -19,7 +20,7 @@ internal sealed class GetQuizByIdQueryHandler(IDbConnectionFactory dbConnectionF
                        FROM quizzes
                        WHERE id = @Id
                        """;
-    var quiz = await connection.QueryFirstOrDefaultAsync<QuizResponse>(sql, new { request.Id });
+    var quiz = await connection!.QueryFirstOrDefaultAsync<QuizResponse>(sql, new { request.Id });
     
     return quiz is null? Result<QuizResponse>.NotFound() : Result<QuizResponse>.Success(quiz);
   }
