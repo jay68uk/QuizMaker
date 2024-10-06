@@ -1,3 +1,4 @@
+using QuizBuilder.Infrastructure;
 using QuizMaker.Api;
 using QuizMaker.Common.Application;
 using QuizMaker.Common.Infrastructure;
@@ -10,6 +11,8 @@ builder.Services.AddApplication(ModuleAssemblyReferences.ApplicationAssemblies()
 
 var databaseConnectionString = builder.Configuration.GetConnectionStringOrThrow("Database");
 builder.Services.AddInfrastructure(databaseConnectionString);
+
+builder.Services.AddQuizBuilderServices(databaseConnectionString);
 
 var app = builder.Build();
 

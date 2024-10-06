@@ -7,7 +7,7 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["src/Api/QuizMaker.Api/QuizMaker.Api.csproj", "src/Api/QuizMaker.Api/"]
+COPY ["/src/Api/QuizMaker.Api/QuizMaker.Api.csproj", "src/Api/QuizMaker.Api/"]
 RUN dotnet restore "src/Api/QuizMaker.Api/QuizMaker.Api.csproj"
 COPY . .
 WORKDIR "/src/src/Api/QuizMaker.Api"

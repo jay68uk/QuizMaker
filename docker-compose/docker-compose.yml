@@ -1,0 +1,18 @@
+﻿services:
+#  quizmaker.api:
+#    image: quizmaker.api
+#    build:
+#      context: .
+#      dockerfile: ../src/Api/QuizMaker.Api/Dockerfile
+
+  quizmaker.database:
+    image: postgres:latest
+    container_name: QuizMaker.Database
+    environment:
+      - POSTGRES_DB=quizmaker
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - ./.containers/db:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
