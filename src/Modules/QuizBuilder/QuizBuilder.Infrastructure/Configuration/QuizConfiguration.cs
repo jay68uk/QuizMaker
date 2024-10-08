@@ -30,8 +30,6 @@ internal sealed class QuizConfiguration : IEntityTypeConfiguration<Quiz>
 
         builder.OwnsOne<QuizAccessCode>(q => q.AccessCode).ToTable("quiz_accessCode");
         
-        builder.HasIndex(x => x.Id).IsUnique();
-        
         builder.HasIndex(x => x.CreatedBy);
     }
 }

@@ -11,7 +11,7 @@ public class QuestionTests
   {
     var description = new Description(QuestionsDirectory.Description);
     var questionNumber = new QuestionNumber(QuestionsDirectory.QuestionNumber1);
-    var question = Question.Question.Create(description, questionNumber);
+    var question = Question.Question.Create(description, questionNumber, QuestionsDirectory.QuizId);
 
     question.Description.Should().BeEquivalentTo(description);
     question.Number.Should().BeEquivalentTo(questionNumber);
@@ -22,7 +22,7 @@ public class QuestionTests
   public void Should_UpdateQuestionNumber_WhenValid()
   {
     var question = Question.Question.Create(new Description(QuestionsDirectory.Description),
-      new QuestionNumber(QuestionsDirectory.QuestionNumber1));
+      new QuestionNumber(QuestionsDirectory.QuestionNumber1), QuestionsDirectory.QuizId);
     var newNumber = new QuestionNumber(QuestionsDirectory.QuestionNumber2);
 
     question.UpdateNumbering(newNumber);

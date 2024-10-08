@@ -6,16 +6,19 @@ public sealed class Question : Entity, IEquatable<Question>
 {
     public Description Description { get; private set; }
     public QuestionNumber Number { get; private set; }
+    
+    public Guid QuizId { get; private set; }
 
-    private Question(Guid id, Description description, QuestionNumber number) : base(id)
+    private Question(Guid id, Description description, QuestionNumber number, Guid quizId) : base(id)
     {
         Description = description;
         Number = number;
+        QuizId = quizId;
     }
 
-    public static Question Create(Description description, QuestionNumber number)
+    public static Question Create(Description description, QuestionNumber number, Guid quizId)
     {
-        var question = new Question(Ulid.NewUlid().ToGuid(), description, number);
+        var question = new Question(Ulid.NewUlid().ToGuid(), description, number, quizId);
 
         return question;
     }
@@ -27,7 +30,9 @@ public sealed class Question : Entity, IEquatable<Question>
 
     public bool Equals(Question? other)
     {
-        return Description.Value == other?.Description.Value && Number.Value == other?.Number.Value;
+        return Description.Value == other?.Description.Value 
+               && Number.Value == other?.Number.Value
+               && QuizId == other.QuizId;
     }
 
     public override bool Equals(object? obj)
@@ -37,7 +42,7 @@ public sealed class Question : Entity, IEquatable<Question>
 
     public override int GetHashCode()
     {
-        return HashCode.Combine(Description, Number);
+        return HashCode.Combine(Description, Number, QuizId);
     }
 
     public static bool operator ==(Question? left, Question? right) => Equals(left, right);
