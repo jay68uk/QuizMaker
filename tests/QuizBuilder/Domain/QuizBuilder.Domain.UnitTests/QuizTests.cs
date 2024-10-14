@@ -1,6 +1,7 @@
 ﻿using Ardalis.Result;
 using FluentAssertions;
 using QuizBuilder.Domain.Quiz;
+using QuizBuilder.Domain.UnitTests.TestData;
 
 namespace QuizBuilder.Domain.UnitTests;
 
@@ -125,6 +126,29 @@ public class QuizTests
     result.IsError().Should().BeTrue();
     result.Errors.Should().Contain(expectedError);
     quiz.Status.Should().Be(status);
+  }
+
+  [Fact]
+  public void Should_SoftDelete_WhenSoftDeleteIsInvoked()
+  {
+      var quiz = Quiz.Quiz.Create(QuizName, Created, UserId);
+
+      quiz.SoftDelete(QuestionsDirectory.DateDeleted);
+
+      quiz.IsDeleted.Should().BeTrue();
+      quiz.DeletedDate.Should().Be(QuestionsDirectory.DateDeleted);
+  }
+  
+  [Fact]
+  public void Should_UndoSoftDelete_WhenUndoDeleteIsInvoked()
+  {
+      var quiz = Quiz.Quiz.Create(QuizName, Created, UserId);
+      quiz.SoftDelete(QuestionsDirectory.DateDeleted);
+    
+      quiz.UndoDelete();
+      
+      quiz.IsDeleted.Should().BeFalse();
+      quiz.DeletedDate.Should().BeNull();
   }
 }
 

@@ -1,3 +1,3 @@
 ﻿namespace QuizBuilder.Application.Features.GetQuizById;
 
-public record QuestionResponse(Guid Id, string Description, int Number);
+public record QuestionResponse(Guid QuestionId, int QuestionNumber, string QuestionDescription);

@@ -1,4 +1,5 @@
 using QuizBuilder.Infrastructure;
+using QuizBuilder.Infrastructure.SeedData;
 using QuizMaker.Api;
 using QuizMaker.Common.Application;
 using QuizMaker.Common.Infrastructure;
@@ -19,5 +20,10 @@ var app = builder.Build();
 app.UseEndpoints();
 
 app.UseHttpsRedirection();
+
+if (app.Environment.IsDevelopment())
+{
+    app.InitialiseQuizSeeding();
+}
 
 app.Run();

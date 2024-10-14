@@ -4,7 +4,7 @@ using QuizMaker.Common.Domain;
 
 namespace QuizBuilder.Domain.Quiz;
 
-public sealed class Quiz : Entity
+public sealed class Quiz : Entity, ISoftDeletable
 {
    private List<Question.Question> _questions;
    public QuizName Name { get; private set; }
@@ -13,6 +13,11 @@ public sealed class Quiz : Entity
    public DateTimeOffset? RanDate { get; private set; }
    public Guid CreatedBy { get; private set; }
    public QuizStatus Status { get; private set; }
+   public bool IsDeleted { get; private set; }
+   public DateTimeOffset? DeletedDate { get; private set; }
+   
+   public IReadOnlyCollection<Question.Question> QuestionsNavigation => _questions.AsReadOnly();
+
    
    private Quiz()
    {
@@ -101,5 +106,27 @@ public sealed class Quiz : Entity
          q.UpdateNumbering(new QuestionNumber(index + 1));
          return q;
       }).ToList();
+   }
+   
+   public void SoftDelete(DateTimeOffset dateDeleted)
+   {
+       IsDeleted = true;
+       DeletedDate = dateDeleted.ToUniversalTime();
+
+       foreach (var question in _questions)
+       {
+            question.SoftDelete(dateDeleted);
+       }
+   }
+   
+   public void UndoDelete()
+   {
+       IsDeleted = false;
+       DeletedDate = null;
+       
+       foreach (var question in _questions)
+       {
+           question.UndoDelete();
+       }
    }
 }

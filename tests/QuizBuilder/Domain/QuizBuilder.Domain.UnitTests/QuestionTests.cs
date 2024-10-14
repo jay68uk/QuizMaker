@@ -88,4 +88,46 @@ public class QuestionTests
     
     questionsEqual.Should().BeFalse();
   }
+
+  [Fact]
+  public void Should_UpdateDescription_WhenInputValid()
+  {
+      var description = new Description(QuestionsDirectory.Description);
+      var questionNumber = new QuestionNumber(QuestionsDirectory.QuestionNumber1);
+      var question = Question.Question.Create(description, questionNumber, QuestionsDirectory.QuizId);
+      var updatedDescription = new Description(QuestionsDirectory.DescriptionUpdate);
+
+      question.UpdateDescription(updatedDescription.Value!);
+
+      question.Description.Should().BeEquivalentTo(updatedDescription);
+      question.Number.Should().BeEquivalentTo(questionNumber);
+      question.Id.Should().NotBe(Guid.Empty);
+  }
+  
+  [Fact]
+  public void Should_SoftDelete_WhenSoftDeleteIsInvoked()
+  {
+      var description = new Description(QuestionsDirectory.Description);
+      var questionNumber = new QuestionNumber(QuestionsDirectory.QuestionNumber1);
+      var question = Question.Question.Create(description, questionNumber, QuestionsDirectory.QuizId);
+      
+      question.SoftDelete(QuestionsDirectory.DateDeleted);
+
+      question.IsDeleted.Should().BeTrue();
+      question.DeletedDate.Should().Be(QuestionsDirectory.DateDeleted);
+  }
+  
+  [Fact]
+  public void Should_UndoSoftDelete_WhenUndoDeleteIsInvoked()
+  {
+      var description = new Description(QuestionsDirectory.Description);
+      var questionNumber = new QuestionNumber(QuestionsDirectory.QuestionNumber1);
+      var question = Question.Question.Create(description, questionNumber, QuestionsDirectory.QuizId);
+      question.SoftDelete(QuestionsDirectory.DateDeleted);
+      
+      question.UndoDelete();
+
+      question.IsDeleted.Should().BeFalse();
+      question.DeletedDate.Should().BeNull();
+  }
 }

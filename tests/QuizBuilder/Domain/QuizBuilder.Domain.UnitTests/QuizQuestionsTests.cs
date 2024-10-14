@@ -66,4 +66,42 @@ public class QuizQuestionsTests
     question[0].Number.Value.Should().Be(QuestionsDirectory.QuestionNumber1);
     question[1].Number.Value.Should().Be(QuestionsDirectory.QuestionNumber2);
   }
+
+  [Fact]
+  public void Should_CascadeSoftDelete_WhenQuizSoftDeleteIsInvoked()
+  {
+      var quiz = Quiz.Quiz.Create(QuizName, Created, UserId);
+      quiz.Add(QuestionsDirectory.Question1());
+      quiz.Add(QuestionsDirectory.Question3());
+
+      quiz.SoftDelete(QuestionsDirectory.DateDeleted);
+      var questions = quiz.GetQuestions().ToList();
+
+      quiz.IsDeleted.Should().BeTrue();
+      quiz.DeletedDate.Should().NotBeNull();
+      questions.Should().HaveCount(2);
+      questions[0].IsDeleted.Should().BeTrue();
+      questions[0].DeletedDate.Should().Be(QuestionsDirectory.DateDeleted);
+      questions[1].IsDeleted.Should().BeTrue();
+      questions[1].DeletedDate.Should().Be(QuestionsDirectory.DateDeleted);
+  }
+
+  [Fact]
+  public void Should_CascadeUndoSoftDelete_WhenQuizUndoDeleteIsInvoked()
+  {
+      var quiz = Quiz.Quiz.Create(QuizName, Created, UserId);
+      quiz.Add(QuestionsDirectory.Question1());
+      quiz.Add(QuestionsDirectory.Question3());
+      quiz.SoftDelete(QuestionsDirectory.DateDeleted);
+    
+      quiz.UndoDelete();
+      var questions = quiz.GetQuestions().ToList();
+      
+      quiz.IsDeleted.Should().BeFalse();
+      quiz.DeletedDate.Should().BeNull();
+      questions[0].IsDeleted.Should().BeFalse();
+      questions[0].DeletedDate.Should().Be(null);
+      questions[1].IsDeleted.Should().BeFalse();
+      questions[0].DeletedDate.Should().Be(null);
+  }
 }

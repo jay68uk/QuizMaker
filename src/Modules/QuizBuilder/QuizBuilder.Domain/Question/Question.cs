@@ -2,12 +2,13 @@
 
 namespace QuizBuilder.Domain.Question;
 
-public sealed class Question : Entity, IEquatable<Question>
+public sealed class Question : Entity, IEquatable<Question>, ISoftDeletable
 {
     public Description Description { get; private set; }
     public QuestionNumber Number { get; private set; }
-    
-    public Guid QuizId { get; private set; }
+    public Guid QuizId { get; }
+    public bool IsDeleted { get; private set;}
+    public DateTimeOffset? DeletedDate { get; private set;}
 
     private Question(Guid id, Description description, QuestionNumber number, Guid quizId) : base(id)
     {
@@ -48,4 +49,21 @@ public sealed class Question : Entity, IEquatable<Question>
     public static bool operator ==(Question? left, Question? right) => Equals(left, right);
 
     public static bool operator !=(Question? left, Question? right) => !Equals(left, right);
+
+    public void UpdateDescription(string updatesQuestionDescription)
+    {
+        Description = new Description(updatesQuestionDescription);
+    }
+    
+    public void SoftDelete(DateTimeOffset dateDeleted)
+    {
+        IsDeleted = true;
+        DeletedDate = dateDeleted.ToUniversalTime();
+    }
+   
+    public void UndoDelete()
+    {
+        IsDeleted = false;
+        DeletedDate = null;
+    }
 }

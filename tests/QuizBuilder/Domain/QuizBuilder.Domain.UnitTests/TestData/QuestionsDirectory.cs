@@ -8,7 +8,9 @@ public static class QuestionsDirectory
   public const int QuestionNumber2= 2;
   public const int QuestionNumber3= 3;
   public const string Description = "Question description";
+  public const string DescriptionUpdate = "Updates question description";
   public static readonly Guid QuizId = Ulid.NewUlid().ToGuid();
+  public static readonly DateTimeOffset DateDeleted = TimeProvider.System.GetLocalNow().ToUniversalTime();
   
   public static Question.Question Question1()
   {
