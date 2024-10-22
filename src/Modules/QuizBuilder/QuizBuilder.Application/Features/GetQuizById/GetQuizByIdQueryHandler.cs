@@ -1,6 +1,7 @@
 ﻿using System.Data.Common;
 using Ardalis.Result;
 using Dapper;
+using QuizBuilder.Application.Abstractions;
 using QuizMaker.Common.Application.Data;
 using QuizMaker.Common.Application.Messaging;
 
@@ -13,15 +14,7 @@ internal sealed class GetQuizByIdQueryHandler(IDbConnectionFactory dbConnectionF
     {
         await using var connection = await dbConnectionFactory.OpenConnectionAsync();
 
-        const string sql = """
-                           SELECT 
-                               q.Id, q.Name, qaC.access_code AS AccessCode, q.created_date AS CreatedDate, q.ran_date AS RanDate, q.created_by AS CreatedBy, q.Status,
-                               qu.Id AS QuestionId, qu.Number AS QuestionNumber, qu.Description AS QuestionDescription
-                           FROM quizzes q
-                           LEFT JOIN questions qu ON q.Id = qu.quiz_id
-                           LEFT JOIN public."quiz_accessCode" qaC ON q.id = qaC.id
-                           WHERE q.Is_Deleted = FALSE AND q.Id = @QuizId
-                           """;
+        const string sql = SqlQueries.GetQuizById;
         var quizDictionary = new Dictionary<Guid, QuizResponse>();
 
         _ = await connection!.QueryAsync<QuizResponse, QuestionResponse, QuizResponse>(

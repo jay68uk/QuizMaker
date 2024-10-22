@@ -45,10 +45,10 @@ public class CodeStructureTests : BaseTest
       .ToList();
 
     var failingTypes = new List<Type>();
-    foreach (Type entityType in entityTypes)
+    foreach (var entityType in entityTypes)
     {
-      ConstructorInfo[] constructors = entityType.GetConstructors(BindingFlags.Public |
-                                                                  BindingFlags.Instance);
+      var constructors = entityType.GetConstructors(BindingFlags.Public |
+                                                    BindingFlags.Instance);
 
       if (constructors.Any(c => c.IsPublic))
       {

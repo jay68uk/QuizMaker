@@ -78,14 +78,13 @@ public class QuizResponseBuilder
   [SuppressMessage("Major Code Smell", "S3928:Parameter names used into ArgumentException constructors should match an existing one ")]
   private QuizResponse Build()
   {
-    return new QuizResponse(_id,
-      [],
-      _name ?? throw new ArgumentNullException(nameof(_name)),
-      _accessCode!,
-      _qrCode!,
-      _createdDate,
-      _ranDate,
-      _createdBy,
-      _status);
+    return new QuizResponse(){Id = _id,
+      Name = _name ?? throw new ArgumentNullException(nameof(_name)),
+      AccessCode = _accessCode!,
+      CreatedDate = _createdDate,
+      RanDate = _ranDate,
+      CreatedBy = _createdBy,
+      Status = _status,
+      Questions = []};
   }
 }
