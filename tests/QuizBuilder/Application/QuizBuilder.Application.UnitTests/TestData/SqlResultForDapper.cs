@@ -14,8 +14,7 @@ public static class SqlResultForDapper
         var fakeTimeProvider = new FakeTimeProvider();
         fakeTimeProvider.SetUtcNow( new DateTimeOffset(2000, 1, 1, 0, 0, 0, TimeSpan.Zero));
         mockConnection.SetupQuery(SqlQueries.GetQuizById).Returns(
-            new {Id = Guid.Empty, Name = string.Empty, AccessCode = string.Empty, CreatedDate = fakeTimeProvider.GetUtcNow(), RanDate = fakeTimeProvider.GetUtcNow(), CreatedBy = Guid.Empty, Status = 0,
-                QuestionId = Guid.Empty, QuestionNumber = 0, QuestionDescription = string.Empty });
+            Enumerable.Empty<QuizResponseTestData>());
 
     }
     
@@ -39,3 +38,6 @@ public static class SqlResultForDapper
 
     }
 }
+
+public record QuizResponseTestData(Guid Id, string Name, string AccessCode, DateTimeOffset CreatedDate, DateTimeOffset RanDate, Guid CreatedBy, QuizStatus Status,
+Guid QuestionId, int QuestionNumber,string QuestionDescription);
