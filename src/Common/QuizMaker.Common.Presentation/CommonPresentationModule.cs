@@ -3,6 +3,7 @@ using FastEndpoints;
 using FastEndpoints.Swagger;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using Scalar.AspNetCore;
 
 namespace QuizMaker.Common.Presentation;
 
@@ -12,7 +13,6 @@ public static class CommonPresentationModule
   {
     services.AddFastEndpoints(options => options.Assemblies = assemblies)
       .SwaggerDocument();
-    
     return services;
   }
 
@@ -22,9 +22,10 @@ public static class CommonPresentationModule
     
     if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
     {
-      app.UseSwaggerGen();
+        app.UseOpenApi(c => c.Path = "/openapi/{documentName}.json");
     }
     
+    app.UseHttpsRedirection();
     
     return app;
   }

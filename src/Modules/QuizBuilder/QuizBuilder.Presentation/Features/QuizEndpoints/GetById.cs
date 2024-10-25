@@ -14,7 +14,7 @@ public class GetById(ISender sender) : EndpointWithoutRequest
 {
     public override void Configure()
     {
-        Get("/quizzes/{QuizId}");
+        Get("/quizzes/{quizId}");
         AllowAnonymous();
     }
 
@@ -22,9 +22,7 @@ public class GetById(ISender sender) : EndpointWithoutRequest
         NotFound,
         ProblemDetails>> ExecuteAsync(CancellationToken ct)
     {
-        var x = Route<string>("QuizId");
-        Console.Write(x);
-        var quizId = Route<Guid>("QuizId");
+        var quizId = Route<Guid>("quizId");
 
         var query = new RequestQuizByIdQuery(quizId);
 

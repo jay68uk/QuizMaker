@@ -4,6 +4,7 @@ using QuizMaker.Api;
 using QuizMaker.Common.Application;
 using QuizMaker.Common.Infrastructure;
 using QuizMaker.Common.Presentation;
+using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,11 +20,10 @@ var app = builder.Build();
 
 app.UseEndpoints();
 
-app.UseHttpsRedirection();
-
 if (app.Environment.IsDevelopment())
 {
     app.InitialiseQuizSeeding();
+    app.MapScalarApiReference();
 }
 
 app.Run();

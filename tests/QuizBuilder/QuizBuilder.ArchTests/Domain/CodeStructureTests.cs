@@ -44,17 +44,11 @@ public class CodeStructureTests : BaseTest
       .Select(t => t.ReflectionType)
       .ToList();
 
-    var failingTypes = new List<Type>();
-    foreach (var entityType in entityTypes)
-    {
-      var constructors = entityType.GetConstructors(BindingFlags.Public |
-                                                    BindingFlags.Instance);
-
-      if (constructors.Any(c => c.IsPublic))
-      {
-        failingTypes.Add(entityType);
-      }
-    }
+    var failingTypes = 
+        (from entityType in entityTypes 
+            let constructors = 
+                entityType.GetConstructors(BindingFlags.Public | BindingFlags.Instance) 
+            where constructors.Any(c => c.IsPublic) select entityType).ToList();
 
     failingTypes.Should().BeEmpty();
   }
