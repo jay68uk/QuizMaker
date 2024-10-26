@@ -1,5 +1,4 @@
 ﻿using FluentAssertions;
-using QuizBuilder.Domain.Question;
 using QuizBuilder.Domain.UnitTests.TestData;
 
 namespace QuizBuilder.Domain.UnitTests;

@@ -8,10 +8,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Dapper" Version="2.1.35" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\..\..\Common\QuizMaker.Common.Application\QuizMaker.Common.Application.csproj" />
       <ProjectReference Include="..\QuizBuilder.Domain\QuizBuilder.Domain.csproj" />
     </ItemGroup>

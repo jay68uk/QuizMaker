@@ -1,0 +1,30 @@
+﻿{
+  "Users": {
+    "Outbox": {
+      "IntervalInSeconds": 5,
+      "BatchSize": 20
+    },
+    "Inbox": {
+      "IntervalInSeconds": 5,
+      "BatchSize": 20
+    },
+    "KeyCloak": {
+      "AdminUrl": "http://quizmaker.identity:8080/admin/realms/evently/",
+      "TokenUrl": "http://quizmaker.identity:8080/realms/evently/protocol/openid-connect/token",
+      "ConfidentialClientId": "quizmaker-confidential-client",
+      "ConfidentialClientSecret": "PzotcrvZRF9BHCKcUxdKfHWlIPECG49k",
+      "PublicClientId": "quizmaker-public-client"
+    },
+    "Authentication": {
+      "Audience": "account",
+      "TokenValidationParameters": {
+        "ValidIssuers": [
+          "http://quizmaker.identity:8080/realms/evently",
+          "http://localhost:18080/realms/quizmaker"
+        ]
+      },
+      "MetadataAddress": "http://quizmaker.identity:8080/realms/evently/.well-known/openid-configuration",
+      "RequireHttpsMetadata": false
+    }
+  }
+}

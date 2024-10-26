@@ -3,6 +3,10 @@ root = true
 # C# files
 [*.cs]
 
+# Exclude Migrations folders
+[**/Migrations/**]
+generated_code = true
+
 #### Core EditorConfig Options ####
 
 # Indentation and spacing

@@ -27,6 +27,7 @@
       <ProjectReference Include="..\..\Common\QuizMaker.Common.Presentation\QuizMaker.Common.Presentation.csproj" />
       <ProjectReference Include="..\..\Modules\QuizBuilder\QuizBuilder.Infrastructure\QuizBuilder.Infrastructure.csproj" />
       <ProjectReference Include="..\..\Modules\QuizBuilder\QuizBuilder.Presentation\QuizBuilder.Presentation.csproj" />
+      <ProjectReference Include="..\..\Modules\QuizUser\QuizUser.csproj" />
     </ItemGroup>
 
 </Project>

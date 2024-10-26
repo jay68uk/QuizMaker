@@ -50,4 +50,22 @@ public class GetByIdTests
     
       quizResponse.Result.Should().BeOfType<NotFound>();
   }
+
+  [Fact]
+  public async Task Should_Return400BadRequest_WhenQuizIdIsInvalid()
+  {
+      var quizId = "01927839-bfaa-1389-13d3-c51feb2052d";
+      var isendMock = Substitute.For<ISender>();
+      isendMock
+          .Send(Arg.Any<RequestQuizByIdQuery>(), Arg.Any<CancellationToken>())
+          .Returns(Result<QuizResponse>.NotFound());
+
+      var endpoint = Factory.Create<GetById>(context =>
+              context.Request.RouteValues.Add("quizId", quizId),
+          isendMock);
+
+      var quizResponse = async () => await endpoint.ExecuteAsync(default);
+
+      await quizResponse.Should().ThrowAsync<ValidationFailureException>();
+  }
 }

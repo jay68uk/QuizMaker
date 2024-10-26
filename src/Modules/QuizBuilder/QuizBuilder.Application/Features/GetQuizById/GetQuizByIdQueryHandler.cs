@@ -1,5 +1,4 @@
-﻿using System.Data.Common;
-using Ardalis.Result;
+﻿using Ardalis.Result;
 using Dapper;
 using QuizBuilder.Application.Abstractions;
 using QuizMaker.Common.Application.Data;
@@ -17,7 +16,7 @@ internal sealed class GetQuizByIdQueryHandler(IDbConnectionFactory dbConnectionF
         const string sql = SqlQueries.GetQuizById;
         var quizDictionary = new Dictionary<Guid, QuizResponse>();
 
-        _ = await connection!.QueryAsync<QuizResponse, QuestionResponse, QuizResponse>(
+        _ = await connection!.QueryAsync<QuizResponse, QuestionResponse?, QuizResponse>(
             sql,
             (quiz, question) =>
             {
@@ -27,7 +26,7 @@ internal sealed class GetQuizByIdQueryHandler(IDbConnectionFactory dbConnectionF
                     quizDictionary.Add(currentQuiz.Id, currentQuiz);
                 }
 
-                if (question.QuestionId != Guid.Empty)
+                if (question is { QuestionId: var id } && id != Guid.Empty)
                 {
                     currentQuiz.Questions.Add(question);
                 }

@@ -1,19 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Common;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Data.Common;
 using Ardalis.Result;
-using Dapper;
-using Microsoft.Extensions.Time.Testing;
 using NSubstitute;
 using NSubstitute.DbConnection;
-using QuizBuilder.Application.Abstractions;
 using QuizBuilder.Application.Features.GetQuizById;
 using QuizBuilder.Application.UnitTests.TestData;
 using QuizMaker.Common.Application.Data;
-using Xunit;
 
 namespace QuizBuilder.Application.UnitTests.Features;
 
