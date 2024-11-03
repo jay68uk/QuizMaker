@@ -20,7 +20,7 @@
   quizmaker.identity:
     image: quay.io/keycloak/keycloak:latest
     container_name: QuizMaker.Identity
-    command: start-dev --import-realm
+    command: start-dev #--import-realm
     environment:
       - KC_HEALTH_ENABLED=true
       - KEYCLOAK_ADMIN=admin
@@ -30,3 +30,4 @@
       - ./.files:/opt/keycloak/data/import
     ports:
       - 18080:8080
+      - 19000:9000

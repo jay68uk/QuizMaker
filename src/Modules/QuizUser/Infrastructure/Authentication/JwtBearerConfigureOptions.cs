@@ -4,7 +4,7 @@ using Microsoft.Extensions.Options;
 
 namespace QuizUser.Infrastructure.Authentication;
 
-internal sealed class JwtBearerConfigureOptions(IConfiguration configuration)
+public sealed class JwtBearerConfigureOptions(IConfiguration configuration)
     : IConfigureNamedOptions<JwtBearerOptions>
 {
     private const string ConfigurationSectionName = "Users:Authentication";

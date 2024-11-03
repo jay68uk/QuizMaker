@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
@@ -33,6 +34,9 @@ public static class UsersModule
 
     private static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
+
+        services.AddAuthenticationInternal();
+
         services.AddAuthorizationInternal();
         
         services.AddScoped<IPermissionService, PermissionService>();
@@ -121,4 +125,12 @@ public static class UsersModule
     //         services.Decorate(integrationEventHandler, closedIdempotentHandler);
     //     }
     // }
+
+    public static IApplicationBuilder UseAuthenticationandAuthorisation(this IApplicationBuilder app)
+    {
+        app.UseAuthentication();
+        app.UseAuthorization();
+
+        return app;
+    }
 }

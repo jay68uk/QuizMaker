@@ -7,9 +7,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Ardalis.Result" Version="9.1.0" />
-      <PackageReference Include="Dapper" Version="2.1.35" />
-      <PackageReference Include="MediatR" Version="12.4.0" />
+        <PackageReference Include="Ardalis.Result" Version="9.1.0"/>
+        <PackageReference Include="Dapper" Version="2.1.35"/>
+        <PackageReference Include="MediatR" Version="12.4.0"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\QuizMaker.Common.Domain\QuizMaker.Common.Domain.csproj"/>
     </ItemGroup>
 
 </Project>
