@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
+using QuizMaker.Common.Infrastructure.Authorisation;
 using QuizUser.Infrastructure.Authentication;
 
 namespace QuizUser.Features.UserProfile;
@@ -15,6 +16,7 @@ internal sealed class GetUserProfile(ISender sender) : EndpointWithoutRequest
   public override void Configure()
   {
     Get("/users/profile");
+    Policies(PolicyNames.MembersProfileGet);
   }
 
   public override async Task<Results<Ok<UserResponse>,

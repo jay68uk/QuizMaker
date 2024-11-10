@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using QuizUser.Infrastructure.Users;
@@ -11,9 +12,11 @@ using QuizUser.Infrastructure.Users;
 namespace QuizUser.Migrations
 {
     [DbContext(typeof(UsersDbContext))]
-    partial class UsersDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241103154831_UserPermissions")]
+    partial class UserPermissions
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,7 +45,7 @@ namespace QuizUser.Migrations
                     b.ToTable("role_permissions", "users");
                 });
 
-            modelBuilder.Entity("QuizMaker.Common.Infrastructure.Authorisation.Permission", b =>
+            modelBuilder.Entity("QuizUser.Features.Users.Permission", b =>
                 {
                     b.Property<string>("Code")
                         .HasMaxLength(100)
@@ -55,7 +58,7 @@ namespace QuizUser.Migrations
                     b.ToTable("permissions", "users");
                 });
 
-            modelBuilder.Entity("QuizMaker.Common.Infrastructure.Authorisation.Role", b =>
+            modelBuilder.Entity("QuizUser.Features.Users.Role", b =>
                 {
                     b.Property<string>("Name")
                         .HasMaxLength(50)
@@ -143,14 +146,14 @@ namespace QuizUser.Migrations
 
             modelBuilder.Entity("PermissionRole", b =>
                 {
-                    b.HasOne("QuizMaker.Common.Infrastructure.Authorisation.Permission", null)
+                    b.HasOne("QuizUser.Features.Users.Permission", null)
                         .WithMany()
                         .HasForeignKey("PermissionCode")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_role_permissions_permissions_permission_code");
 
-                    b.HasOne("QuizMaker.Common.Infrastructure.Authorisation.Role", null)
+                    b.HasOne("QuizUser.Features.Users.Role", null)
                         .WithMany()
                         .HasForeignKey("RoleName")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -160,7 +163,7 @@ namespace QuizUser.Migrations
 
             modelBuilder.Entity("RoleUser", b =>
                 {
-                    b.HasOne("QuizMaker.Common.Infrastructure.Authorisation.Role", null)
+                    b.HasOne("QuizUser.Features.Users.Role", null)
                         .WithMany()
                         .HasForeignKey("RolesName")
                         .OnDelete(DeleteBehavior.Cascade)

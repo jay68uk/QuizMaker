@@ -1,4 +1,5 @@
-﻿using QuizUser.Features.UserProfile;
+﻿using QuizUser.Abstractions.Identity;
+using QuizUser.Features.UserProfile;
 
 namespace QuizUser.Abstractions.Sql;
 
@@ -14,6 +15,19 @@ internal static class SqlQueries
                 last_name AS {nameof(UserResponse.LastName)}
             FROM users.users
             WHERE id = @UserId
+            """;
+  }
+
+  public static string GetUserPermissionsSqlQuery()
+  {
+    return $"""
+            SELECT DISTINCT
+                u.id AS {nameof(UserPermission.UserId)},
+                rp.permission_code AS {nameof(UserPermission.Permission)}
+            FROM users.users u
+            JOIN users.user_roles ur ON ur.user_id = u.id
+            JOIN users.role_permissions rp ON rp.role_name = ur.role_name
+            WHERE u.identity_id = @IdentityId
             """;
   }
 }

@@ -1,29 +1,31 @@
-﻿namespace QuizMaker.Common.Domain;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace QuizMaker.Common.Domain;
 
 public abstract class Entity
 {
-    private readonly List<IDomainEvent> _domainEvents = [];
+  private readonly List<IDomainEvent> _domainEvents = [];
 
-    protected Entity(Guid id)
-    {
-        Id = id;
-    }
+  protected Entity(Guid id)
+  {
+    Id = id;
+  }
 
-    protected Entity()
-    {
-    }
+  protected Entity()
+  {
+  }
 
-    public Guid Id { get; init; }
+  public Guid Id { get; init; }
 
-    public List<IDomainEvent> DomainEvents => _domainEvents.ToList();
+  [NotMapped] public List<IDomainEvent> DomainEvents => _domainEvents.ToList();
 
-    public void ClearDomainEvents()
-    {
-        _domainEvents.Clear();
-    }
+  public void ClearDomainEvents()
+  {
+    _domainEvents.Clear();
+  }
 
-    protected void Raise(IDomainEvent domainEvent)
-    {
-        _domainEvents.Add(domainEvent);
-    }
+  protected void Raise(IDomainEvent domainEvent)
+  {
+    _domainEvents.Add(domainEvent);
+  }
 }
