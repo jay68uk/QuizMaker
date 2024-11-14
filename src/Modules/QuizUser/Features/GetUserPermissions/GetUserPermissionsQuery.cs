@@ -1,5 +1,5 @@
 ﻿using QuizMaker.Common.Application.Messaging;
-using QuizUser.Infrastructure.Authorisation;
+using QuizUser.Features.Authorisation;
 
 namespace QuizUser.Features.GetUserPermissions;
 

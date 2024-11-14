@@ -4,7 +4,7 @@ using QuizMaker.Common.Application.Data;
 using QuizMaker.Common.Application.Messaging;
 using QuizUser.Abstractions.Identity;
 using QuizUser.Abstractions.Sql;
-using QuizUser.Infrastructure.Authorisation;
+using QuizUser.Features.Authorisation;
 
 namespace QuizUser.Features.GetUserPermissions;
 

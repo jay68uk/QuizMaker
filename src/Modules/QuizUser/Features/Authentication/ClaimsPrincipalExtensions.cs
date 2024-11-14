@@ -1,7 +1,7 @@
 ﻿using System.Security.Claims;
 using QuizMaker.Common.Application.Exceptions;
 
-namespace QuizUser.Infrastructure.Authentication;
+namespace QuizUser.Features.Authentication;
 
 public static class ClaimsPrincipalExtensions
 {

@@ -3,9 +3,10 @@ using Ardalis.Result;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.DependencyInjection;
 using QuizMaker.Common.Application.Exceptions;
-using QuizUser.Infrastructure.Authentication;
+using QuizUser.Abstractions.Authorisation;
+using QuizUser.Features.Authentication;
 
-namespace QuizUser.Infrastructure.Authorisation;
+namespace QuizUser.Features.Authorisation;
 
 internal sealed class CustomClaimsTransformation(IServiceScopeFactory serviceScopeFactory) : IClaimsTransformation
 {

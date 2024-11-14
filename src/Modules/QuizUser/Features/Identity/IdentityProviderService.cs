@@ -3,7 +3,7 @@ using Ardalis.Result;
 using QuizMaker.Common.Infrastructure.Logging;
 using QuizUser.Abstractions.Identity;
 
-namespace QuizUser.Infrastructure.Identity;
+namespace QuizUser.Features.Identity;
 
 internal sealed class IdentityProviderService(
   KeyCloakClient keyCloakClient,
@@ -26,7 +26,7 @@ internal sealed class IdentityProviderService(
 
     try
     {
-      var identityId = await keyCloakClient.RegisterUserAsync(userRepresentation, cancellationToken);
+      var identityId = await keyCloakClient.RegisterUser(userRepresentation, cancellationToken);
 
       return identityId;
     }

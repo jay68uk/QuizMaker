@@ -3,7 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using QuizMaker.Common.Infrastructure.Authorisation;
-using QuizUser.Infrastructure.Authentication;
+using QuizUser.Features.Authentication;
 
 namespace QuizUser.Features.UserProfile;
 

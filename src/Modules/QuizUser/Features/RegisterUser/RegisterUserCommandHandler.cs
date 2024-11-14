@@ -1,7 +1,7 @@
 ﻿using Ardalis.Result;
-using QuizMaker.Common.Application.Data;
 using QuizMaker.Common.Application.Messaging;
 using QuizUser.Abstractions.Identity;
+using QuizUser.Abstractions.Users;
 using QuizUser.Features.Users;
 
 namespace QuizUser.Features.RegisterUser;
