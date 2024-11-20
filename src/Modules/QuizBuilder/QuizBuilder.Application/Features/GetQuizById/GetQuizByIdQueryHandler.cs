@@ -16,7 +16,7 @@ internal sealed class GetQuizByIdQueryHandler(IDbConnectionFactory dbConnectionF
     const string sql = SqlQueries.GetQuizById;
     var quizDictionary = new Dictionary<Guid, QuizResponse>();
 
-    _ = await connection!.QueryAsync<QuizResponse, QuestionResponse?, QuizResponse>(
+    _ = await connection.QueryAsync<QuizResponse, QuestionResponse?, QuizResponse>(
       sql,
       (quiz, question) =>
       {

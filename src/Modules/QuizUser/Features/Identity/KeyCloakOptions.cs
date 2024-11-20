@@ -1,10 +1,10 @@
 ﻿namespace QuizUser.Features.Identity;
 
-internal sealed class KeyCloakOptions
+public sealed class KeyCloakOptions
 {
-  public string AdminUrl { get; init; }
+  public string AdminUrl { get; set; }
 
-  public string TokenUrl { get; init; }
+  public string TokenUrl { get; set; }
 
   public string ConfidentialClientId { get; init; }
 

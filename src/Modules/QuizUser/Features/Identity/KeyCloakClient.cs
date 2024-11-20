@@ -2,14 +2,11 @@
 
 namespace QuizUser.Features.Identity;
 
-internal sealed class KeyCloakClient(HttpClient httpClient)
+public sealed class KeyCloakClient(HttpClient httpClient)
 {
-  internal async Task<string> RegisterUser(UserRepresentation user, CancellationToken cancellationToken = default)
+  public async Task<string> RegisterUser(UserRepresentation user, CancellationToken cancellationToken = default)
   {
-    // ReSharper disable once SuggestVarOrType_SimpleTypes
-#pragma warning disable IDE0007
-    HttpResponseMessage httpResponseMessage = await httpClient.PostAsJsonAsync(
-#pragma warning restore IDE0007
+    var httpResponseMessage = await httpClient.PostAsJsonAsync(
       "users",
       user,
       cancellationToken);
@@ -17,6 +14,16 @@ internal sealed class KeyCloakClient(HttpClient httpClient)
     httpResponseMessage.EnsureSuccessStatusCode();
 
     return ExtractIdentityIdFromLocationHeader(httpResponseMessage);
+  }
+
+  public async Task UpdateUser(UserRepresentation user, CancellationToken cancellationToken = default)
+  {
+    var httpResponseMessage = await httpClient.PutAsJsonAsync(
+      "users/" + user.Id,
+      user,
+      cancellationToken);
+
+    httpResponseMessage.EnsureSuccessStatusCode();
   }
 
   private static string ExtractIdentityIdFromLocationHeader(
@@ -35,7 +42,7 @@ internal sealed class KeyCloakClient(HttpClient httpClient)
       usersSegmentName,
       StringComparison.InvariantCultureIgnoreCase);
 
-    var identityId = locationHeader.Substring(userSegmentValueIndex + usersSegmentName.Length);
+    var identityId = locationHeader[(userSegmentValueIndex + usersSegmentName.Length)..];
 
     return identityId;
   }

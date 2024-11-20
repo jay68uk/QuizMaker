@@ -4,7 +4,7 @@ using QuizMaker.Common.Application.Data;
 using QuizMaker.Common.Application.Messaging;
 using QuizUser.Abstractions.Sql;
 
-namespace QuizUser.Features.UserProfile;
+namespace QuizUser.Features.GetUserProfile;
 
 internal sealed class GetUserByIdQueryHandler(IDbConnectionFactory dbConnectionFactory)
   : IQueryHandler<RequestUserByIdQuery, UserByIdResponse>

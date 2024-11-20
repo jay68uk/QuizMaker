@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using QuizMaker.Common.Infrastructure.Authorisation;
 using QuizUser.Features.Authentication;
 
-namespace QuizUser.Features.UserProfile;
+namespace QuizUser.Features.GetUserProfile;
 
 internal sealed class GetUserProfile(ISender sender) : EndpointWithoutRequest
 <Results<

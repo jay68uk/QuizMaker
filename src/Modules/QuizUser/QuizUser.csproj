@@ -7,14 +7,23 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Common\QuizMaker.Common.Application\QuizMaker.Common.Application.csproj" />
-      <ProjectReference Include="..\..\Common\QuizMaker.Common.Domain\QuizMaker.Common.Domain.csproj" />
-      <ProjectReference Include="..\..\Common\QuizMaker.Common.Infrastructure\QuizMaker.Common.Infrastructure.csproj" />
-      <ProjectReference Include="..\..\Common\QuizMaker.Common.Presentation\QuizMaker.Common.Presentation.csproj" />
+        <ProjectReference Include="..\..\Common\QuizMaker.Common.Application\QuizMaker.Common.Application.csproj"/>
+        <ProjectReference Include="..\..\Common\QuizMaker.Common.Domain\QuizMaker.Common.Domain.csproj"/>
+        <ProjectReference Include="..\..\Common\QuizMaker.Common.Infrastructure\QuizMaker.Common.Infrastructure.csproj"/>
+        <ProjectReference Include="..\..\Common\QuizMaker.Common.Presentation\QuizMaker.Common.Presentation.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.10" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.10"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="Behaviours\"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <InternalsVisibleTo Include="$(AssemblyName).UnitTests"/>
+        <InternalsVisibleTo Include="DynamicProxyGenAssembly2"/>
     </ItemGroup>
 
 </Project>

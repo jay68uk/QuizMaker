@@ -1,5 +1,5 @@
 ﻿using QuizUser.Abstractions.Identity;
-using QuizUser.Features.UserProfile;
+using QuizUser.Features.GetUserProfile;
 
 namespace QuizUser.Abstractions.Sql;
 

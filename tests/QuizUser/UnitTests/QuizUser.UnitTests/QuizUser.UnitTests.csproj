@@ -7,7 +7,6 @@
 
         <IsPackable>false</IsPackable>
         <IsTestProject>true</IsTestProject>
-        <RootNamespace>QuizBuilder.Application.UnitTests</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -19,16 +18,15 @@
     <ItemGroup>
         <Using Include="Xunit"/>
     </ItemGroup>
-
+    
     <ItemGroup>
-        <AssemblyAttribute Include="System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute"/>
+        <ProjectReference Include="..\..\..\..\QuizMakerBaseTestSetup\QuizMakerBaseTestSetup.csproj"/>
+        <ProjectReference Include="..\..\..\..\src\Common\QuizMaker.Common.Application\QuizMaker.Common.Application.csproj"/>
+        <ProjectReference Include="..\..\..\..\src\Modules\QuizUser\QuizUser.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\..\..\QuizMakerBaseTestSetup\QuizMakerBaseTestSetup.csproj"/>
-        <ProjectReference Include="..\..\..\..\src\Common\QuizMaker.Common.Domain\QuizMaker.Common.Domain.csproj"/>
-        <ProjectReference Include="..\..\..\..\src\Modules\QuizBuilder\QuizBuilder.Application\QuizBuilder.Application.csproj"/>
-        <ProjectReference Include="..\..\..\..\src\Modules\QuizBuilder\QuizBuilder.Domain\QuizBuilder.Domain.csproj"/>
+        <AssemblyAttribute Include="System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute"/>
     </ItemGroup>
 
 </Project>

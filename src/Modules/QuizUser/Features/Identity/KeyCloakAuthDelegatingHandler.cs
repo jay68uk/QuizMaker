@@ -5,7 +5,8 @@ using Microsoft.Extensions.Options;
 
 namespace QuizUser.Features.Identity;
 
-internal sealed class KeyCloakAuthDelegatingHandler(IOptions<KeyCloakOptions> options) : DelegatingHandler
+public sealed class KeyCloakAuthDelegatingHandler(
+  IOptions<KeyCloakOptions> options) : DelegatingHandler
 {
   private readonly KeyCloakOptions _options = options.Value;
 
@@ -47,8 +48,9 @@ internal sealed class KeyCloakAuthDelegatingHandler(IOptions<KeyCloakOptions> op
     return await authorizationResponse.Content.ReadFromJsonAsync<AuthToken>(cancellationToken);
   }
 
-  internal sealed class AuthToken
+  private sealed record AuthToken
   {
+    // ReSharper disable once UnusedAutoPropertyAccessor.Local
     [JsonPropertyName("access_token")] public string AccessToken { get; init; }
   }
 }

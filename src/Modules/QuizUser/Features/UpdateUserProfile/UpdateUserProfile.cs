@@ -1,16 +1,17 @@
 ﻿using System.Net;
 using FastEndpoints;
 using MediatR;
+using QuizMaker.Common.Infrastructure.Authorisation;
 using QuizUser.Features.Authentication;
-using ICommand = QuizMaker.Common.Application.Messaging.ICommand;
 
-namespace QuizUser.Features;
+namespace QuizUser.Features.UpdateUserProfile;
 
 internal sealed class UpdateUserProfile(ISender sender) : Endpoint<UpdateUserRequest>
 {
   public override void Configure()
   {
     Put("/users/profile");
+    Policies(PolicyNames.MembersProfileUpdate);
   }
 
   public override async Task HandleAsync(UpdateUserRequest request, CancellationToken ct)
@@ -19,20 +20,17 @@ internal sealed class UpdateUserProfile(ISender sender) : Endpoint<UpdateUserReq
     var result = await sender.Send(new UpdateUserCommand(
       userId,
       request.FirstName,
-      request.LastName), ct);
+      request.LastName,
+      request.Email), ct);
 
     if (result.IsSuccess)
     {
       await SendAsync(null, (int)HttpStatusCode.Accepted, ct);
+      return;
     }
-    else
-    {
-      await SendErrorsAsync((int)HttpStatusCode.BadRequest, ct);
-    }
+
+    await SendAsync(result.ValidationErrors, (int)HttpStatusCode.BadRequest, ct);
   }
 }
 
-internal sealed record UpdateUserCommand(Guid UserId, string RequestFirstName, string RequestLastName)
-  : ICommand;
-
-internal sealed record UpdateUserRequest(string FirstName, string LastName);
+internal sealed record UpdateUserRequest(string FirstName, string LastName, string Email);

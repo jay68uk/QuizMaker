@@ -1,6 +1,7 @@
 ﻿namespace QuizUser.Features.Identity;
 
-internal sealed record UserRepresentation(
+public sealed record UserRepresentation(
+  string? Id,
   string Username,
   string Email,
   string FirstName,

@@ -7,11 +7,13 @@
 
         <IsPackable>false</IsPackable>
         <IsTestProject>true</IsTestProject>
-        <RootNamespace>QuizBuilder.Application.UnitTests</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="coverlet.collector" Version="6.0.0"/>
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0"/>
+        <PackageReference Include="Testcontainers.Keycloak" Version="4.0.0"/>
+        <PackageReference Include="Testcontainers.PostgreSql" Version="4.0.0"/>
         <PackageReference Include="xunit" Version="2.5.3"/>
         <PackageReference Include="xunit.runner.visualstudio" Version="2.5.3"/>
     </ItemGroup>
@@ -21,14 +23,15 @@
     </ItemGroup>
 
     <ItemGroup>
-        <AssemblyAttribute Include="System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute"/>
+        <ProjectReference Include="..\QuizMakerBaseTestSetup\QuizMakerBaseTestSetup.csproj"/>
+        <ProjectReference Include="..\src\Api\QuizMaker.Api\QuizMaker.Api.csproj"/>
+        <ProjectReference Include="..\src\Modules\QuizUser\QuizUser.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\..\..\QuizMakerBaseTestSetup\QuizMakerBaseTestSetup.csproj"/>
-        <ProjectReference Include="..\..\..\..\src\Common\QuizMaker.Common.Domain\QuizMaker.Common.Domain.csproj"/>
-        <ProjectReference Include="..\..\..\..\src\Modules\QuizBuilder\QuizBuilder.Application\QuizBuilder.Application.csproj"/>
-        <ProjectReference Include="..\..\..\..\src\Modules\QuizBuilder\QuizBuilder.Domain\QuizBuilder.Domain.csproj"/>
+        <None Update="quizmaker-realm-export.json">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
     </ItemGroup>
 
 </Project>

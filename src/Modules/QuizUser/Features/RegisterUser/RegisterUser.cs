@@ -31,7 +31,4 @@ internal sealed class RegisterUser(ISender sender) : Endpoint<RegisterUserReques
   }
 }
 
-internal sealed record RegisterUserCommand(string Email, string Password, string FirstName, string LastName)
-  : QuizMaker.Common.Application.Messaging.ICommand<Guid>;
-
 internal sealed record RegisterUserRequest(string Email, string Password, string FirstName, string LastName);

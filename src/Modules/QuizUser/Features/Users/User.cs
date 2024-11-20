@@ -1,10 +1,9 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using QuizMaker.Common.Domain;
+﻿using QuizMaker.Common.Domain;
 using QuizMaker.Common.Infrastructure.Authorisation;
+using QuizUser.Features.Users.DomainEvents;
 
 namespace QuizUser.Features.Users;
 
-[SuppressMessage("Major Code Smell", "S125:Sections of code should not be commented out")]
 public sealed class User : Entity
 {
   private readonly List<Role> _roles = [];
@@ -36,21 +35,25 @@ public sealed class User : Entity
 
     user._roles.Add(Role.Member);
 
-    //user.Raise(new UserRegisteredDomainEvent(user.Id));
+    user.Raise(new UserRegisteredDomainEvent(user.Id));
 
     return user;
   }
 
-  public void Update(string firstName, string lastName)
+  public void Update(string firstName, string lastName, string email)
   {
-    if (FirstName == firstName && LastName == lastName)
+    if (FirstName == firstName && LastName == lastName && Email == email)
     {
       return;
     }
 
     FirstName = firstName;
     LastName = lastName;
+    Email = email;
+  }
 
-    //Raise(new UserProfileUpdatedDomainEvent(Id, FirstName, LastName));
+  public void RaiseUpdateDomainEvent(Guid userId)
+  {
+    Raise(new UserProfileUpdatedDomainEvent(userId, FirstName, LastName, Email));
   }
 }
