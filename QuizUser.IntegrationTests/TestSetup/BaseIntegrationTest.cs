@@ -3,8 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace QuizUser.IntegrationTests.TestSetup;
 
-[Collection(nameof(IntegrationTestCollection))]
-public abstract class BaseIntegrationTest : IDisposable
+public abstract class BaseIntegrationTest
 {
   private readonly IServiceScope _scope;
   protected readonly ISender Sender;

@@ -1,9 +1,12 @@
 ﻿using DotNet.Testcontainers.Builders;
+using FastEndpoints.Testing;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestPlatform.TestHost;
 using QuizUser.Features.Identity;
 using QuizUser.Features.Users.Data;
@@ -12,7 +15,7 @@ using Testcontainers.PostgreSql;
 
 namespace QuizUser.IntegrationTests.TestSetup;
 
-public class IntegrationTestWebAppFactory : WebApplicationFactory<Program>, IAsyncLifetime
+public class IntegrationTestWebAppFactory : AppFixture<Program>
 {
   private readonly PostgreSqlContainer _dbContainer = new PostgreSqlBuilder()
     .WithImage("postgres:latest")
@@ -32,21 +35,42 @@ public class IntegrationTestWebAppFactory : WebApplicationFactory<Program>, IAsy
     .WithCommand("--import-realm")
     .Build();
 
-  public async Task InitializeAsync()
+  protected override async Task SetupAsync()
   {
-    await _dbContainer.StartAsync();
-    await _keycloakContainer.StartAsync();
-    MigrateDatabase();
+    try
+    {
+      await _dbContainer.StartAsync();
+      await _keycloakContainer.StartAsync();
+      MigrateDatabase();
+    }
+    catch (Exception ex)
+    {
+      await Console.Error.WriteLineAsync($"Failed to initialize containers: {ex.Message}");
+      throw;
+    }
   }
 
-  public new async Task DisposeAsync()
+  protected override async Task TearDownAsync()
   {
-    await _dbContainer.StopAsync();
-    await _keycloakContainer.StopAsync();
+    try
+    {
+      await _dbContainer.StopAsync();
+      await _keycloakContainer.StopAsync();
+    }
+    catch (Exception ex)
+    {
+      await Console.Error.WriteLineAsync($"Failed to dispose containers: {ex.Message}");
+    }
   }
 
-  protected override void ConfigureWebHost(IWebHostBuilder builder)
+  protected override void ConfigureApp(IWebHostBuilder builder)
   {
+    builder.ConfigureLogging(logging =>
+    {
+      logging.ClearProviders();
+      logging.AddConsole();
+    });
+
     Environment.SetEnvironmentVariable("ConnectionStrings:Database", _dbContainer.GetConnectionString());
 
     var keycloakAddress = _keycloakContainer.GetBaseAddress();
@@ -61,6 +85,8 @@ public class IntegrationTestWebAppFactory : WebApplicationFactory<Program>, IAsy
 
     builder.ConfigureTestServices(services =>
     {
+      services.RemoveAll(typeof(IHostedService));
+
       services.Configure<KeyCloakOptions>(o =>
       {
         o.AdminUrl = $"{keycloakAddress}admin/realms/quizmaker/";
@@ -76,11 +102,9 @@ public class IntegrationTestWebAppFactory : WebApplicationFactory<Program>, IAsy
       .Options;
 
     using var context = new UsersDbContext(options);
-    context.Database.Migrate();
-  }
-
-  private void SeedKeycloakUsers()
-  {
-    
+    if (context.Database.GetPendingMigrations().Any())
+    {
+      context.Database.Migrate();
+    }
   }
 }
