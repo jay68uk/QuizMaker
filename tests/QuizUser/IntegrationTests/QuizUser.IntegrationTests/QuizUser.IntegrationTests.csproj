@@ -1,0 +1,47 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+
+        <IsPackable>false</IsPackable>
+        <IsTestProject>true</IsTestProject>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Bogus" Version="35.6.1"/>
+        <PackageReference Include="coverlet.collector" Version="6.0.0"/>
+        <PackageReference Include="FastEndpoints.Testing" Version="5.31.0"/>
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0"/>
+        <PackageReference Include="Testcontainers.Keycloak" Version="4.0.0"/>
+        <PackageReference Include="Testcontainers.PostgreSql" Version="4.0.0"/>
+        <PackageReference Include="xunit" Version="2.9.2"/>
+        <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Using Include="Xunit"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Update="quizmaker-realm-export.json">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\..\..\src\Api\QuizMaker.Api\QuizMaker.Api.csproj"/>
+        <ProjectReference Include="..\..\..\..\src\Modules\QuizUser\QuizUser.csproj"/>
+        <ProjectReference Include="..\..\..\QuizMakerBaseTestSetup\QuizMakerBaseTestSetup.csproj"/>
+    </ItemGroup>
+
+    <Target Name="CopyDepsFile" AfterTargets="Build">
+        <Copy SourceFiles="$(SolutionDir)\src\Modules\QuizUser\bin\$(Configuration)\$(TargetFramework)\QuizUser.deps.json"
+              DestinationFiles="$(OutDir)testhost.deps.json"
+              SkipUnchangedFiles="true"/>
+    </Target>
+</Project>

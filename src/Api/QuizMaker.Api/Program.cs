@@ -1,4 +1,5 @@
 using System.Reflection;
+using Azure.Identity;
 using QuizBuilder.Infrastructure;
 using QuizBuilder.Infrastructure.SeedData;
 using QuizMaker.Api.Extensions;
@@ -28,6 +29,14 @@ try
     .ReadFrom.Configuration(builder.Configuration)
     .CreateLogger();
 
+  var keyVaultName = builder.Configuration.GetValueOrThrow<string>("AzureKeyVault:VaultName");
+  if (!string.IsNullOrEmpty(keyVaultName))
+  {
+    var keyVaultUri = new Uri($"https://{keyVaultName}.vault.azure.net/");
+
+    builder.Configuration.AddAzureKeyVault(keyVaultUri, new DefaultAzureCredential());
+  }
+
   builder.Services.AddTransient(typeof(ILoggerAdaptor<>), typeof(LoggerAdaptor<>));
   builder.Host.UseSerilog();
   builder.Services.AddSingleton(Log.Logger);
@@ -49,7 +58,7 @@ try
   builder.Services.AddEndpoints(modulePresentationAssemblies);
   builder.Services.AddApplication(moduleApplicationAssemblies);
 
-  var databaseConnectionString = builder.Configuration.GetConnectionStringOrThrow("Database");
+  var databaseConnectionString = builder.Configuration.GetConnectionStringOrThrow("KvDatabase");
   builder.Services.AddInfrastructure(databaseConnectionString);
 
   builder.Services.AddQuizBuilderServices(databaseConnectionString);
@@ -76,4 +85,8 @@ catch (Exception e)
 finally
 {
   Log.CloseAndFlush();
+}
+
+public abstract partial class Program
+{
 }

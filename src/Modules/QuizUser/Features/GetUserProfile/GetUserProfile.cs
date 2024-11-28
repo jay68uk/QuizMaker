@@ -1,5 +1,6 @@
 ﻿using FastEndpoints;
 using MediatR;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using QuizMaker.Common.Infrastructure.Authorisation;
@@ -17,6 +18,7 @@ internal sealed class GetUserProfile(ISender sender) : EndpointWithoutRequest
   {
     Get("/users/profile");
     Policies(PolicyNames.MembersProfileGet);
+    Description(x => x.WithName("UserProfile"));
   }
 
   public override async Task<Results<Ok<UserResponse>,

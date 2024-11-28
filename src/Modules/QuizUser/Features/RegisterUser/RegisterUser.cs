@@ -31,4 +31,4 @@ internal sealed class RegisterUser(ISender sender) : Endpoint<RegisterUserReques
   }
 }
 
-internal sealed record RegisterUserRequest(string Email, string Password, string FirstName, string LastName);
+public record RegisterUserRequest(string Email, string Password, string FirstName, string LastName);

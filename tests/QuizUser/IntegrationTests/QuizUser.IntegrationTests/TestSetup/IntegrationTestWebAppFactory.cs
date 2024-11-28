@@ -1,4 +1,5 @@
-﻿using DotNet.Testcontainers.Builders;
+﻿using Bogus;
+using DotNet.Testcontainers.Builders;
 using FastEndpoints.Testing;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
@@ -7,7 +8,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.VisualStudio.TestPlatform.TestHost;
 using QuizUser.Features.Identity;
 using QuizUser.Features.Users.Data;
 using Testcontainers.Keycloak;
@@ -35,7 +35,9 @@ public class IntegrationTestWebAppFactory : AppFixture<Program>
     .WithCommand("--import-realm")
     .Build();
 
-  protected override async Task SetupAsync()
+  public Faker FakerInstance = new();
+
+  protected override async Task PreSetupAsync()
   {
     try
     {

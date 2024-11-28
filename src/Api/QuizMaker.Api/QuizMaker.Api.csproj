@@ -5,31 +5,34 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <UserSecretsId>c442e693-9ca9-4f30-b828-acba10badeb6</UserSecretsId>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="8.0.1" />
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.10" />
+        <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="8.0.1"/>
+        <PackageReference Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.3.2"/>
+        <PackageReference Include="Azure.Identity" Version="1.13.1"/>
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.10"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.8">
-          <PrivateAssets>all</PrivateAssets>
-          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="8.0.10" />
-        <PackageReference Include="Scalar.AspNetCore" Version="1.2.22" />
+        <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="8.0.10"/>
+        <PackageReference Include="Scalar.AspNetCore" Version="1.2.22"/>
     </ItemGroup>
 
     <ItemGroup>
-      <Content Include="..\..\..\.dockerignore">
-        <Link>.dockerignore</Link>
-      </Content>
+        <Content Include="..\..\..\.dockerignore">
+            <Link>.dockerignore</Link>
+        </Content>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Common\QuizMaker.Common.Infrastructure\QuizMaker.Common.Infrastructure.csproj" />
-      <ProjectReference Include="..\..\Common\QuizMaker.Common.Presentation\QuizMaker.Common.Presentation.csproj" />
-      <ProjectReference Include="..\..\Modules\QuizBuilder\QuizBuilder.Infrastructure\QuizBuilder.Infrastructure.csproj" />
-      <ProjectReference Include="..\..\Modules\QuizBuilder\QuizBuilder.Presentation\QuizBuilder.Presentation.csproj" />
-      <ProjectReference Include="..\..\Modules\QuizUser\QuizUser.csproj" />
+        <ProjectReference Include="..\..\Common\QuizMaker.Common.Infrastructure\QuizMaker.Common.Infrastructure.csproj"/>
+        <ProjectReference Include="..\..\Common\QuizMaker.Common.Presentation\QuizMaker.Common.Presentation.csproj"/>
+        <ProjectReference Include="..\..\Modules\QuizBuilder\QuizBuilder.Infrastructure\QuizBuilder.Infrastructure.csproj"/>
+        <ProjectReference Include="..\..\Modules\QuizBuilder\QuizBuilder.Presentation\QuizBuilder.Presentation.csproj"/>
+        <ProjectReference Include="..\..\Modules\QuizUser\QuizUser.csproj"/>
     </ItemGroup>
 
 </Project>
